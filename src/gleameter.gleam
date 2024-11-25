@@ -1,124 +1,83 @@
-pub type Value {
-  Value(value: Float, unit: Unit)
+pub type Quantity(value, units) {
+  Quantity(value: value)
 }
 
-pub fn of(value value: Float, unit unit: Unit) {
-  Value(value:, unit:)
+pub type Product(unit1, unit2)
+
+pub type Squared(unit) =
+  Product(unit, unit)
+
+pub type Cubed(unit) =
+  Product(Squared(unit), unit)
+
+pub type Rate(dependent, independent)
+
+pub type Inverse(unit) =
+  Rate(Unitless, unit)
+
+pub type Unitless
+
+pub const zero = Quantity(value: 0)
+
+// Arithmetic Operations
+pub fn add(
+  lhs: Quantity(Float, unit),
+  rhs: Quantity(Float, unit),
+) -> Quantity(Float, unit) {
+  Quantity(lhs.value +. rhs.value)
 }
 
-pub type Unit {
-  Unit(
-    scale: Float,
-    time: Float,
-    mass: Float,
-    length: Float,
-    temperature: Float,
-    luminosity: Float,
-    current: Float,
-    amount: Float,
-  )
+pub fn subtract(
+  lhs: Quantity(Float, unit),
+  rhs: Quantity(Float, unit),
+) -> Quantity(Float, unit) {
+  Quantity(lhs.value -. rhs.value)
 }
 
-pub const null = Unit(
-  scale: 1.0,
-  time: 0.0,
-  mass: 0.0,
-  length: 0.0,
-  temperature: 0.0,
-  luminosity: 0.0,
-  current: 0.0,
-  amount: 0.0,
-)
-
-pub fn unit(
-  scale: Float,
-  time: Float,
-  mass: Float,
-  length: Float,
-  temperature: Float,
-  luminosity: Float,
-  current: Float,
-  amount: Float,
-) {
-  Unit(
-    scale:,
-    time:,
-    mass:,
-    length:,
-    temperature:,
-    luminosity:,
-    current:,
-    amount:,
-  )
+pub fn multiply(
+  lhs: Quantity(Float, unit),
+  rhs: Quantity(Float, unit),
+) -> Quantity(Float, unit) {
+  Quantity(lhs.value *. rhs.value)
 }
 
-pub fn scale(from from: Unit, scale scale: Float) {
-  Unit(..from, scale:)
+pub fn divide(
+  lhs: Quantity(Float, unit),
+  rhs: Quantity(Float, unit),
+) -> Quantity(Float, unit) {
+  Quantity(lhs.value /. rhs.value)
 }
 
-pub fn time(from from: Unit, time time: Float) {
-  Unit(..from, time:)
+pub fn product(
+  lhs: Quantity(Float, unit1),
+  rhs: Quantity(Float, unit2),
+) -> Quantity(Float, Product(unit1, unit2)) {
+  Quantity(lhs.value *. rhs.value)
 }
 
-pub fn mass(from from: Unit, mass mass: Float) {
-  Unit(..from, mass:)
+pub fn scale(lhs: Float, rhs: Quantity(Float, unit)) -> Quantity(Float, unit) {
+  Quantity(lhs *. rhs.value)
 }
 
-pub fn length(from from: Unit, length length: Float) {
-  Unit(..from, length:)
+pub fn over(
+  lhs: Quantity(Float, unit1),
+  rhs: Quantity(Float, unit2),
+) -> Quantity(Float, Rate(unit1, unit2)) {
+  Quantity(lhs.value /. rhs.value)
 }
 
-pub fn temperature(from from: Unit, temperature temperature: Float) {
-  Unit(..from, temperature:)
+pub fn from(value value: Float) -> Quantity(Float, Unitless) {
+  Quantity(value:)
 }
 
-pub fn luminosity(from from: Unit, luminosity luminosity: Float) {
-  Unit(..from, luminosity:)
+pub fn from_int(value value: Int) -> Quantity(Int, Unitless) {
+  Quantity(value:)
 }
 
-pub fn current(from from: Unit, current current: Float) {
-  Unit(..from, current:)
+pub fn unwrap(value value: Quantity(Float, unit)) -> Float {
+  value.value
 }
 
-pub fn amount(from from: Unit, amount amount: Float) {
-  Unit(..from, amount:)
-}
-
-pub fn times(this lhs: Unit, by rhs: Unit) {
-  Unit(
-    scale: lhs.scale *. rhs.scale,
-    time: lhs.time +. rhs.time,
-    mass: lhs.mass +. rhs.mass,
-    length: lhs.length +. rhs.length,
-    temperature: lhs.temperature +. rhs.temperature,
-    luminosity: lhs.luminosity +. rhs.luminosity,
-    current: lhs.current +. rhs.current,
-    amount: lhs.amount +. rhs.amount,
-  )
-}
-
-pub fn divide(this lhs: Unit, by rhs: Unit) {
-  Unit(
-    scale: lhs.scale /. rhs.scale,
-    time: lhs.time -. rhs.time,
-    mass: lhs.mass -. rhs.mass,
-    length: lhs.length -. rhs.length,
-    temperature: lhs.temperature -. rhs.temperature,
-    luminosity: lhs.luminosity -. rhs.luminosity,
-    current: lhs.current -. rhs.current,
-    amount: lhs.amount -. rhs.amount,
-  )
-}
-
-pub fn inverse(of unit: Unit) {
-  Unit(
-    scale: unit.scale,
-    time: unit.time *. -1.0,
-    mass: unit.mass *. -1.0,
-    length: unit.length *. -1.0,
-    temperature: unit.temperature *. -1.0,
-    luminosity: unit.luminosity *. -1.0,
-    current: unit.current *. -1.0,
-    amount: unit.amount *. -1.0,
-  )
+pub fn unwrap_int(value value: Quantity(Int, unit)) -> Int {
+  value.value
 }

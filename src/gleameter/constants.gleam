@@ -1,106 +1,39 @@
-import gleameter.{Unit, Value}
+import gleameter.{type Quantity, Quantity}
+import gleameter/units/amount.{type Mole}
+import gleameter/units/charge.{type Coulomb}
+import gleameter/units/energy.{type Joule}
+import gleameter/units/frequency.{type Hertz}
+import gleameter/units/length.{type Meter}
+import gleameter/units/luminous_flux.{type Lumen}
+import gleameter/units/power.{type Watt}
+import gleameter/units/temperature.{type Kelvin}
+import gleameter/units/time.{type Second}
 
 /// The hyperfine transition frequency of Cs, in hertz
-pub const v_cs = Value(
-  9_192_631_770.0,
-  Unit(
-    scale: 1.0,
-    time: -1.0,
-    mass: 0.0,
-    length: 0.0,
-    temperature: 0.0,
-    luminosity: 0.0,
-    current: 0.0,
-    amount: 0.0,
-  ),
-)
+pub const v_cs: Quantity(Float, Hertz) = Quantity(9_192_631_770.0)
 
 /// The speed of light in a vaccuum, in meters per second
-pub const c = Value(
+pub const c: Quantity(Float, gleameter.Rate(Meter, Second)) = Quantity(
   299_792_458.0,
-  Unit(
-    scale: 1.0,
-    time: -1.0,
-    mass: 0.0,
-    length: 1.0,
-    temperature: 0.0,
-    luminosity: 0.0,
-    current: 0.0,
-    amount: 0.0,
-  ),
 )
 
 /// The Planck constant, in joule-seconds
-pub const h = Value(
+pub const h: Quantity(Float, gleameter.Product(Joule, Second)) = Quantity(
   6.62607015e-34,
-  Unit(
-    scale: 1.0,
-    time: -1.0,
-    mass: 1.0,
-    length: 2.0,
-    temperature: 0.0,
-    luminosity: 0.0,
-    current: 0.0,
-    amount: 0.0,
-  ),
 )
 
-/// Elementary charge, in coloumbs
-pub const e = Value(
-  1.602176634e-19,
-  Unit(
-    scale: 1.0,
-    time: 1.0,
-    mass: 0.0,
-    length: 0.0,
-    temperature: 0.0,
-    luminosity: 0.0,
-    current: 1.0,
-    amount: 0.0,
-  ),
-)
+/// Elementary charge, in coulombs
+pub const e: Quantity(Float, Coulomb) = Quantity(1.602176634e-19)
 
 /// The Boltzmann constant, in joules per kelvin
-pub const k = Value(
+pub const k: Quantity(Float, gleameter.Rate(Joule, Kelvin)) = Quantity(
   1.380649e-23,
-  Unit(
-    scale: 1.0,
-    time: -2.0,
-    mass: 1.0,
-    length: 2.0,
-    temperature: -1.0,
-    luminosity: 0.0,
-    current: 0.0,
-    amount: 0.0,
-  ),
 )
 
 /// Avogadro's number, in inverse moles
-pub const n_a = Value(
+pub const n_a: Quantity(Float, gleameter.Inverse(Mole)) = Quantity(
   6.02214076e23,
-  Unit(
-    scale: 1.0,
-    time: 0.0,
-    mass: 0.0,
-    length: 0.0,
-    temperature: 0.0,
-    luminosity: 0.0,
-    current: 0.0,
-    amount: -1.0,
-  ),
 )
 
-/// The luminous efficacy of 540 THz radiation
-pub const k_cd = Value(
-  683.0,
-  Unit(
-    scale: 1.0,
-    time: 3.0,
-    mass: -1.0,
-    length: -2.0,
-    temperature: 0.0,
-    luminosity: 1.0,
-    current: 0.0,
-    amount: 0.0,
-  ),
-)
+/// The luminous efficacy of 540 THz radiation, in lumens per watt
+pub const k_cd: Quantity(Float, gleameter.Rate(Lumen, Watt)) = Quantity(683.0)
