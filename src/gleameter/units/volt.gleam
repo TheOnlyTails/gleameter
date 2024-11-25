@@ -275,4 +275,3 @@ pub const quectovolt = Unit(
   current: -1.0,
   amount: 0.0,
 )
-

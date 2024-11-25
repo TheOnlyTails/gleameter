@@ -275,4 +275,3 @@ pub const quectokatal = Unit(
   current: 0.0,
   amount: 1.0,
 )
-

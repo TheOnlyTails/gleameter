@@ -275,4 +275,3 @@ pub const quectocoulomb = Unit(
   current: 1.0,
   amount: 1.0,
 )
-

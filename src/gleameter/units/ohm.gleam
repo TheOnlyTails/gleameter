@@ -275,4 +275,3 @@ pub const quectoohm = Unit(
   current: -2.0,
   amount: 0.0,
 )
-

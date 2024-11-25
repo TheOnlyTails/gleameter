@@ -275,4 +275,3 @@ pub const quectobecquerel = Unit(
   current: 0.0,
   amount: 0.0,
 )
-
