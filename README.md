@@ -10,12 +10,14 @@ gleam add gleameter@1
 ```
 
 ```gleam
-import gleameter.{Value}
-import gleameter/units/meter.{kilometer}
-import gleameter/units/second.{hour}
+import gleameter/units/length.{kilometer}
+import gleameter/units/time.{hour}
+import gleameter
 
 pub fn main() {
-  let car_speed = Value(30, kilometer |> gleameter.divided(by: hour))
+  let road_length = kilometer(30) // Length
+  let travel_time = hour(1) // Time
+  let car_speed = road_length |> gleameter.over(travel_time) // Rate(Length, Time)
 }
 ```
 
